@@ -21,16 +21,14 @@
 						//alert("error, refresh please.");
 					} 
 				});
-				auth.login('anonymous');
-				console.log("login");
-				mydata.push({'number': number,
+				console.log(auth.login('anonymous'));
+				console.log(mydata.push({'number': number,
 							 'name': name,
 							 'qq': qq,
 							 'mail': mail,
 							 'phone': phone,
 							 'address': address,
-							 'live': live});
-				console.log("push");
+							 'live': live}));
 				//auth.logout();
 			}
 		</script>
