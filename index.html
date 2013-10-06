@@ -20,13 +20,13 @@
 						alert(error);
 					} 
 					else if (user) {
-						auth.login('anonymous');
 						alert("login");
 					}
 					else {
-						auth.logout();
+						alert("logout");
 					}
 				});
+				auth.login('anonymous');
 				mydata.push({number: number,
 							 name: name,
 							 qq: qq,
