@@ -18,7 +18,7 @@
 				var mydata = new Firebase('https://ccontacts.firebaseio.com/');
 				var auth = new FirebaseSimpleLogin(mydata, function(error, user) {
 					if (error) {
-						alert(error, refresh please.);
+						alert("error, refresh please.");
 					} 
 				});
 				auth.login('anonymous');
