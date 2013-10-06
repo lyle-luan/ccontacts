@@ -21,14 +21,18 @@
 						//alert("error, refresh please.");
 					} 
 				});
-				console.log(auth.login('anonymous'));
-				console.log(mydata.push({'number': number,
-							 'name': name,
-							 'qq': qq,
-							 'mail': mail,
-							 'phone': phone,
-							 'address': address,
-							 'live': live}));
+				auth.login('anonymous');
+				console.log(mydata.push({'number': 'number',
+							 'name': 'name',
+							 'qq': 'qq',
+							 'mail': 'mail',
+							 'phone': 'phone',
+							 'address': 'address',
+							 'live': 'live'}));
+				var data = mydata.push();
+				data.set({'user_id': "fred',
+						  'text': 'Yabba Dabba Doo!'});
+				console.log(data.toString());
 				//auth.logout();
 			}
 		</script>
