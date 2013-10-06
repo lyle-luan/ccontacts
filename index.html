@@ -20,12 +20,10 @@
 					if (error) {
 						alert("error, refresh please.");
 					} 
-					else{
-						alert("provider:"+user.provider);
-						alert("id:"+user.id);
-					}
 				});
 				auth.login('anonymous');
+				alert("provider:"+auth.provider);
+				alert("id:"+auth.id);
 				/*
 				mydata.push({'number': 'number',
 							 'name': 'name',
