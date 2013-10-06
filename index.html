@@ -14,7 +14,7 @@
 		<input type="text" id="live" placeholder="2013-2016年生活地">
 		<button onclick="writetofirebase()">提交</button>
 		<script>
-			var mydata = new Firebase('https://ccontact.firebaseio.com/jk4b');
+			var mydata = new Firebase('https://ccontacts.firebaseio.com/jk4b');
 			function writetofirebase()
 			{
 				var num=document.getElementById("number").value;
@@ -33,10 +33,6 @@
 							 address: address,
 							 live: live});
 			}
-			mydata.on('child_added',function(snapshot){
-				var message = snapshot.val();
-				alert("number:"+message.num);
-			});
 		</script>
 	</body>
 </html>
