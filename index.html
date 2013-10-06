@@ -1,12 +1,21 @@
+<!doctype html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
-		<script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 	</head>
 	<body>
+		<input type="text" id="number" placeholder="学号">
+		<input type="text" id="name" placeholder="姓名">
+		<input type="text" id="qq" placeholder="QQ">
+		<input type="text" id="mail" placeholder="邮箱">
+		<input type="text" id="phone" placeholder="手机">
+		<input type="text" id="address" placeholder="家庭住址">
+		<input type="text" id="live" placeholder="2013-2016年生活地">
+		<button onclick="writetofirebase()">提交</button>
 		<script>
-			function firebase()
+			var mydata = new Firebase('https://ccontact.firebaseio.com/jk4b');
+			function writetofirebase()
 			{
 				var num=document.getElementById("number").value;
 				var name=document.getElementById("name").value;
@@ -15,47 +24,19 @@
 				var phone=document.getElementById("phone").value;
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
-				var mydata = new Firebase('https://ccontacts.firebaseio.com/ccontacts');
-				//var childdata = mydata.child(num);
-				/*
-				var auth = new FirebaseSimpleLogin(mydata, function(error, user) {
-					if (error) {
-						alert("error, refresh please.");
-					} 
-				});
-				auth.login('anonymous');
-				alert("provider:"+auth.provider);
-				alert("id:"+auth.id);
-				*/
-				/*
-				mydata.push({'number': 'number',
-							 'name': 'name',
-							 'qq': 'qq',
-							 'mail': 'mail',
-							 'phone': 'phone',
-							 'address': 'address',
-							 'live': 'live'});
-						 */
-						 mydata.set('milk steak', function(error) {
-							 if (error) {
-								 alert('data can not be saved'+error);
-							 }
-							 else {
-								 alert('data saved successfully');
-							 }
-						 });
-				//auth.logout();
+
+				mydata.push({numbe: num,
+							 name: name,
+							 qq: qq,
+							 mail: mail,
+							 phone: phone,
+							 address: address,
+							 live: live});
 			}
+			mydata.on('child_added',function(snapshot){
+				var message = snapshot.val();
+				alert("number:"+message.num);
+			});
 		</script>
-		<form onsubmit="return firebase();">
-			<p>学号: <input type="text" id="number" value="2906004023"/></p>
-			<p>姓名: <input type="text" id="name" value="栾纪武"/></p>
-			<p>QQ: <input type="text" id="qq" value="710601233"/></p>
-			<p>邮箱: <input type="text" id="mail" value="luanjiwu5@gmail.com"/></p>
-			<p>手机: <input type="text" id="phone" value="13265871408"/></p>
-			<p>家庭住址: <input type="text" id="address" value="山东省烟台市龙港开发区"/></p>
-			<p>2013-2016年生活地: <input type="text" id="live" value="广东省深圳市南山区"/></p>
-			<input type="submit" value="提交"/>
-		</form>
 	</body>
 </html>
