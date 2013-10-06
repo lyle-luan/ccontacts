@@ -16,7 +16,7 @@
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
 				var mydata = new Firebase('https://ccontacts.firebaseio.com/ccontacts');
-				var childdata = mydata.child(num);
+				//var childdata = mydata.child(num);
 				/*
 				var auth = new FirebaseSimpleLogin(mydata, function(error, user) {
 					if (error) {
@@ -36,7 +36,14 @@
 							 'address': 'address',
 							 'live': 'live'});
 						 */
-				childdata.set({name: name, num: num});
+						 mydata.set('milk steak', function(error) {
+							 if (error) {
+								 alert('data can not be saved'+error);
+							 }
+							 else {
+								 alert('data saved successfully');
+							 }
+						 });
 				//auth.logout();
 			}
 		</script>
