@@ -15,24 +15,23 @@
 				var phone=document.getElementById("phone").value;
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
-				var mydata = new Firebase('https://ccontacts.firebaseio.com/ccontacts');
+				var mydata = new Firebase('https://ccontacts.firebaseio.com/');
 				var auth = new FirebaseSimpleLogin(mydata, function(error, user) {
 					if (error) {
 						//alert("error, refresh please.");
 					} 
 				});
 				auth.login('anonymous');
-				console.log(mydata.push({'number': 'number',
+				/*
+				mydata.push({'number': 'number',
 							 'name': 'name',
 							 'qq': 'qq',
 							 'mail': 'mail',
 							 'phone': 'phone',
 							 'address': 'address',
-							 'live': 'live'}));
-				var data = mydata.push();
-				data.set({'user_id': "fred',
-						  'text': 'Yabba Dabba Doo!'});
-				console.log(data.toString());
+							 'live': 'live'});
+						 */
+				mydata.set({name: name, number: number});
 				//auth.logout();
 			}
 		</script>
