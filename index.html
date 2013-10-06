@@ -8,14 +8,16 @@
 		<script>
 			function firebase()
 			{
-				var number=document.getElementById("number").value;
+				var num=document.getElementById("number").value;
 				var name=document.getElementById("name").value;
 				var qq=document.getElementById("qq").value;
 				var mail=document.getElementById("mail").value;
 				var phone=document.getElementById("phone").value;
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
-				var mydata = new Firebase('https://ccontacts.firebaseio.com/');
+				var mydata = new Firebase('https://ccontacts.firebaseio.com/ccontacts');
+				var childdata = mydata.child(num);
+				/*
 				var auth = new FirebaseSimpleLogin(mydata, function(error, user) {
 					if (error) {
 						alert("error, refresh please.");
@@ -24,6 +26,7 @@
 				auth.login('anonymous');
 				alert("provider:"+auth.provider);
 				alert("id:"+auth.id);
+				*/
 				/*
 				mydata.push({'number': 'number',
 							 'name': 'name',
@@ -33,7 +36,7 @@
 							 'address': 'address',
 							 'live': 'live'});
 						 */
-				mydata.set({name: name, number: number});
+				childdata.set({name: name, num: num});
 				//auth.logout();
 			}
 		</script>
