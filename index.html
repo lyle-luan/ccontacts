@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+		<script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 	</head>
 	<body>
 		<script>
@@ -14,6 +15,18 @@
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
 				var mydata = new Firebase('https://ccontacts.firebaseio.com/');
+				var auth = new FirebaseSimpleLogin(mydata, function(error, user) {
+					if (error) {
+						console.log(error);
+					} 
+					else if (user) {
+						auth.login('anonymous');
+						console.log("login");
+					}
+					else {
+						auth.logout();
+					}
+				});
 				mydata.push({number: number,
 							 name: name,
 							 qq: qq,
@@ -21,6 +34,7 @@
 							 phone: phone,
 							 address: address,
 							 live: live});
+				auth.logout();
 			}
 		</script>
 		<form onsubmit="return firebase();">
