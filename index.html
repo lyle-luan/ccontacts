@@ -13,7 +13,14 @@
 				var phone=document.getElementById("phone").value;
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
-				alert(name);
+				var mydata = new Firebase('https://ccontacts.firebaseio.com/');
+				mydata.push({number: number,
+							 name: name,
+							 qq: qq,
+							 mail: mail,
+							 phone: phone,
+							 address: address,
+							 live: live});
 			}
 		</script>
 		<form onsubmit="return firebase();">
