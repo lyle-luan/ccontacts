@@ -1,14 +1,30 @@
 <html>
+	<head>
+		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+	</head>
 	<body>
-		<form action="" method="get">
-			<p>学号: <input type="text" name="name" /></p>
-			<p>姓名: <input type="text" name="name" /></p>
-			<p>QQ: <input type="text" name="name" /></p>
-			<p>邮箱: <input type="text" name="name" /></p>
-			<p>手机: <input type="text" name="name" /></p>
-			<p>家庭住址: <input type="text" name="name" /></p>
-			<p>2013-2016年生活地: <input type="text" name="name" /></p>
-			<input type="submit" value="提交"/>
+		<script>
+			function firebase()
+			{
+				var number=document.getElementById("number");
+				var name=document.getElementById("name");
+				var qq=document.getElementById("qq");
+				var mail=document.getElementById("mail");
+				var phone=document.getElementById("phone");
+				var address=document.getElementById("address");
+				var live=document.getElementById("live");
+				alert(name);
+			}
+		</script>
+		<form>
+			<p>学号: <input type="text" id="number" value="2906004023"/></p>
+			<p>姓名: <input type="text" id="name" value="栾纪武"/></p>
+			<p>QQ: <input type="text" id="qq" value="710601233"/></p>
+			<p>邮箱: <input type="text" id="mail" value="luanjiwu5@gmail.com"/></p>
+			<p>手机: <input type="text" id="phone" value="13265871408"/></p>
+			<p>家庭住址: <input type="text" id="address" value="山东省烟台市龙港开发区"/></p>
+			<p>2013-2016年生活地: <input type="text" id="live" value="广东省深圳市南山区"/></p>
+			<input type="submit" value="提交" onclick="firebase()"/>
 		</form>
 	</body>
 </html>
