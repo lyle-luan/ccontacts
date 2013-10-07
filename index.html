@@ -18,7 +18,7 @@
 				line-height:80px;
 				border-bottom:2px solid #333;
 				color:#333;
-				width:700px;
+				width:750px;
 				letter-spacing:5px;
 			}
 			#info-item,#op-button{
@@ -26,7 +26,7 @@
 				margin-left:auto;
 				margin-right:auto;
 				margin-top:30px;
-				width:700px;
+				width:750px;
 			}
 			#info-item span{
 				display:inline-block;
@@ -35,8 +35,11 @@
 				padding-right:30px;
 				text-align:right;
 			}
+			#info-item span{
+				*display:inline;
+			}
 			#info-item input{
-				width:400px;
+				width:350px;
 				height:25px;
 				border:1px solid #d4d4d4;
 				outline:none;
@@ -64,19 +67,31 @@
 			{
 				background-color:#2a71ba;
 				}
+			#info-item .err-msg{
+				width:100px;
+				color:red;
+				padding-left:10px;
+				font-size:12px;
+				text-align:left;
+			}
+			.right-info{
+				font-size:15px;
+				color:#7bca3d;
+				font-weight:bold;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="Main">
 			<div id="info-title">计科四班通信录更新</div>
 			<div id="info-item">
-				<span>学号</span><input type="text" id="number">
-				<span>姓名</span><input type="text" id="name">
-				<span>QQ</span><input type="text" id="qq">
-				<span>邮箱</span><input type="text" id="mail">
-				<span>手机</span><input type="text" id="phone">
-				<span>家庭住址</span><input type="text" id="address">
-				<span>2013-2016年生活地</span><input type="text" id="live">
+				<span>学号</span><input type="text" id="number" onblur="CheckIsNull('number')"><span id="number-err" class="err-msg"></span>
+				<span>姓名</span><input type="text" id="name" onblur="CheckIsNull('name')"><span id="name-err" class="err-msg"></span>
+				<span>QQ</span><input type="text" id="qq" onblur="CheckIsNull('qq')"><span id="qq-err" class="err-msg"></span>
+				<span>邮箱</span><input type="text" id="mail" onblur="CheckMail()"><span id="mail-err" class="err-msg"></span>
+				<span>手机</span><input type="text" id="phone" onblur="CheckMobile()"><span id="phone-err" class="err-msg"></span>
+				<span>家庭住址</span><input type="text" id="address" onblur="CheckIsNull('address')"><span id="address-err" class="err-msg"></span>
+				<span>2013-2016年生活地</span><input type="text" id="live" onblur="CheckIsNull('live')"><span id="live-err" class="err-msg"></span>
 			</div>
 			<div id="op-button"><button type="button" onclick="resetinfo()">重置</button><button onclick="writetofirebase()">提交</button></div>
 		</div>
@@ -111,6 +126,10 @@
 				var address=document.getElementById("address").value;
 				var live=document.getElementById("live").value;
 
+				if(!CheckNull(num,name,qq,mail,phone,address,live)){
+					return false;
+				}
+
 				var mydate = getNowFormatDate();
 
 				mydata.push({numbe: num,
@@ -131,6 +150,77 @@
 				document.getElementById("phone").value="";
 				document.getElementById("address").value="";
 				document.getElementById("live").value="";
+			};
+			var CheckNull=function(num,name,qq,mail,phone,address,live){
+				var flag=true;
+				if(num==null || num==""){
+					document.getElementById("number-err").innerHTML="学号不允许为空";
+					flag=false;
+				}
+				if(name==null || name==""){
+					document.getElementById("name-err").innerHTML="姓名不允许为空";
+					flag=false;
+				}
+				if(qq==null || qq==""){
+					document.getElementById("qq-err").innerHTML="QQ不允许为空";
+					flag=false;
+				}
+				if(mail==null || mail==""){
+					document.getElementById("mail-err").innerHTML="邮箱不允许为空";
+					flag=false;
+				}
+				if(phone==null || phone==""){
+					document.getElementById("phone-err").innerHTML="手机不允许为空";
+					flag=false;
+				}
+				if(address==null || address==""){
+					document.getElementById("address-err").innerHTML="地址不允许为空";
+					flag=false;
+				}
+				if(live==null || live==""){
+					document.getElementById("live-err").innerHTML="生活地不允许为空";
+					flag=false;
+				}
+				return flag;
+			};
+			var CheckIsNull=function(id){
+				var val=document.getElementById(id).value;
+				if(val==null || val==""){
+					document.getElementById(id+"-err").innerHTML="不允许为空";
+				}
+				else{
+					document.getElementById(id+"-err").innerHTML='<label class="right-info">√</label>';
+				}
+			};
+			var CheckMail=function(){
+				if(document.getElementById("mail").value==""){
+					document.getElementById("mail-err").innerHTML="不允许为空";
+					return false;
+				}
+				reg=/^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/gi;  
+				if(!reg.test(document.getElementById("mail").value)){
+					//alert("非法的电子邮件");
+					document.getElementById("mail").focus();
+					document.getElementById("mail-err").innerHTML="非法的电子邮件";
+				}
+				else{
+					document.getElementById("mail-err").innerHTML='<label class="right-info">√</label>';
+				}
+			};
+			var CheckMobile=function(){
+				if(document.getElementById("phone").value==""){
+					document.getElementById("phone-err").innerHTML="不允许为空";
+					return false;
+				}
+				var reg=/^1\d{10}$/gi;  
+				if(!reg.test(document.getElementById("phone").value)){   
+					//alert("非法的手机号码");
+					document.getElementById("phone").focus();
+					document.getElementById("phone-err").innerHTML="非法的手机号码";
+				}
+				else{
+					document.getElementById("phone-err").innerHTML='<label class="right-info">√</label>';
+				}
 			};
 		</script>
 	</body>
