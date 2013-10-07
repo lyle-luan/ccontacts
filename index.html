@@ -3,16 +3,83 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 		<script src='https://cdn.firebase.com/v0/firebase.js'></script>
+		<style>
+			#Main{
+				position:relative;
+				font-family:微软雅黑;
+				width:100%;
+			}
+			#info-title{
+				position:relative;
+				margin-left:auto;
+				margin-right:auto;
+				font-size:20px;
+				font-weight:bold;
+				line-height:80px;
+				border-bottom:2px solid #333;
+				color:#333;
+				width:700px;
+				letter-spacing:5px;
+			}
+			#info-item,#op-button{
+				position:relative;
+				margin-left:auto;
+				margin-right:auto;
+				margin-top:30px;
+				width:700px;
+			}
+			#info-item span{
+				display:inline-block;
+				line-height:40px;
+				width:180px;
+				padding-right:30px;
+				text-align:right;
+			}
+			#info-item input{
+				width:400px;
+				height:25px;
+				border:1px solid #d4d4d4;
+				outline:none;
+			}
+			#info-item input:focus{
+				border-color:#419bf7;
+			}
+			#op-button{
+				text-align:right;
+			}
+			#op-button button
+			{
+				cursor:pointer;
+				font-family:微软雅黑;
+				font-size:15px;
+				color:White;
+				width:100px;
+				height:33px;
+				height:34px\9;
+				border:none;
+				background-color:#419bf7;
+				margin-left:20px;
+				}
+			#op-button button:hover
+			{
+				background-color:#2a71ba;
+				}
+		</style>
 	</head>
 	<body>
-		<input type="text" id="number" placeholder="学号">
-		<input type="text" id="name" placeholder="姓名">
-		<input type="text" id="qq" placeholder="QQ">
-		<input type="text" id="mail" placeholder="邮箱">
-		<input type="text" id="phone" placeholder="手机">
-		<input type="text" id="address" placeholder="家庭住址">
-		<input type="text" id="live" placeholder="2013-2016年生活地">
-		<button onclick="writetofirebase()">提交</button>
+		<div id="Main">
+			<div id="info-title">计科四班通信录更新</div>
+			<div id="info-item">
+				<span>学号</span><input type="text" id="number">
+				<span>姓名</span><input type="text" id="name">
+				<span>QQ</span><input type="text" id="qq">
+				<span>邮箱</span><input type="text" id="mail">
+				<span>手机</span><input type="text" id="phone">
+				<span>家庭住址</span><input type="text" id="address">
+				<span>2013-2016年生活地</span><input type="text" id="live">
+			</div>
+			<div id="op-button"><button type="button" onclick="resetinfo()">重置</button><button onclick="writetofirebase()">提交</button></div>
+		</div>
 		<script>
 			var mydata = new Firebase('https://uestccontacts.firebaseio.com/jk4b');
 			/*function getNowFormatDate come from http://blog.sina.com.cn/s/blog_6901b83701011no3.html*/
@@ -56,6 +123,15 @@
 							 date: mydate});
 				window.location.href="success.html";
 			}
+			var resetinfo=function(){
+				document.getElementById("number").value="";
+				document.getElementById("name").value="";
+				document.getElementById("qq").value="";
+				document.getElementById("mail").value="";
+				document.getElementById("phone").value="";
+				document.getElementById("address").value="";
+				document.getElementById("live").value="";
+			};
 		</script>
 	</body>
 </html>
